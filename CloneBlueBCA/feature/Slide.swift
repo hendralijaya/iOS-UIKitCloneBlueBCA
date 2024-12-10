@@ -8,19 +8,13 @@
 import UIKit
 
 class Slide: UIView {
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
     
     lazy var titleLabel: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .clear
         textView.font = .boldSystemFont(ofSize: 20)
-        textView.textAlignment = .center
+        textView.textAlignment = .left
         textView.isScrollEnabled = false
         textView.isEditable = false
         return textView
@@ -31,10 +25,17 @@ class Slide: UIView {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .clear
         textView.font = .systemFont(ofSize: 16)
-        textView.textAlignment = .center
+        textView.textAlignment = .left
         textView.isScrollEnabled = false
         textView.isEditable = false
         return textView
+    }()
+    
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     override init(frame: CGRect) {
@@ -48,10 +49,10 @@ class Slide: UIView {
     }
     
     private func setViews() {
-        self.addSubview(imageView)
         self.addSubview(titleLabel)
         self.addSubview(descriptionLabel)
-        self.backgroundColor = UIColor.gray
+        self.addSubview(imageView)
+        self.backgroundColor = .clear
     }
     
     private func layoutViews() {
@@ -62,16 +63,16 @@ class Slide: UIView {
     
     private func layoutImageView() {
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 55),
+            imageView.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 20),
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 160),
-            imageView.heightAnchor.constraint(equalToConstant: 160)
+            imageView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 
     private func layoutTitleLabel() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
         ])

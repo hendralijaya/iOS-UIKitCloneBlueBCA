@@ -1,0 +1,15 @@
+{
+  "originHash" : "fcf8c79fe7093ceb9a9dfb0b83862268d4066402d43bad49476c4a627d4e54ac",
+  "pins" : [
+    {
+      "identity" : "wescan",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WeTransfer/WeScan.git",
+      "state" : {
+        "revision" : "5eee784d8233bc209e8fc38980fd847293c96ebc",
+        "version" : "3.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

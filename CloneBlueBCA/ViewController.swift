@@ -1,147 +1,58 @@
+//import UIKit
+//import SwiftUI
 //
-//  ViewController.swift
-//  CloneBlueBCA
-//
-//  Created by hendra on 27/11/24.
-//
-
-import UIKit
-import SwiftUI
-
-class ViewController: UIViewController {
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "blu"
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 36, weight: .bold)
-        return label
-    }()
-    
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "star.fill")
-        imageView.tintColor = .white
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    let headerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 16
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        return stackView
-    }()
-    
-    let ctaActionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Mulai Langkahmu Bareng blu!"
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
-        label.numberOfLines = 2
-        label.lineBreakMode = .byWordWrapping
-        return label
-    }()
-    
-    let descriptionCtaLabel: UILabel = {
-        let label = UILabel()
-        label.text = "untuk hidup lebih mudah dan terkoneksi, apapun tujuanmu"
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.numberOfLines = 2
-        label.lineBreakMode = .byWordWrapping
-        return label
-    }()
-    
-    let contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.distribution = .fill
-        return stackView
-    }()
-    
-    let carouselImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "star.fill")
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
-    let startButton: BluButton = {
-        let button = BluButton()
-        button.setLabelText("Yuk Mulai!")
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    //scrollview to enable horizontal scrolling
-    let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.isPagingEnabled = true
-        scrollView.showsHorizontalScrollIndicator = false
-        return scrollView
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .systemCyan
-        
-        headerStackView.addArrangedSubview(titleLabel)
-        headerStackView.addArrangedSubview(imageView)
-        
-        contentStackView.addArrangedSubview(ctaActionLabel)
-        contentStackView.addArrangedSubview(descriptionCtaLabel)
-        contentStackView.addArrangedSubview(carouselImageView)
-        contentStackView.addArrangedSubview(startButton)
-        
-        
-        let stackView = UIStackView(arrangedSubviews: [headerStackView, contentStackView])
-        stackView.axis = .vertical
-        stackView.spacing = 32
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(stackView)
-        
-        NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 40),
-            imageView.heightAnchor.constraint(equalToConstant: 40),
-            stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            carouselImageView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            carouselImageView.heightAnchor.constraint(equalTo: carouselImageView.widthAnchor)
-        ])
-        
-        ctaActionLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        descriptionCtaLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        
-        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc private func startButtonTapped() {
-        print("BluButton clicked! Perform your action here.")
-    }
-}
-
-struct ViewControllerPreview: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
-        // Update the UIViewController (if needed)
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewControllerPreview()
-            .ignoresSafeArea()
-    }
-}
+//class ViewController: UIViewController {
+//    
+//    let carouselVC = CarouselOpeningViewController()
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.view.backgroundColor = .systemCyan
+//        
+//        // Add headerStackView
+//        headerStackView.addArrangedSubview(titleLabel)
+//        headerStackView.addArrangedSubview(imageView)
+//        view.addSubview(headerStackView)
+//        
+//        // Add carouselVC
+//        addChild(carouselVC)
+//        guard let carouselView = carouselVC.view else {
+//            print("Error: carouselVC.view is nil")
+//            return
+//        }
+//        carouselView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(carouselView)
+//        carouselVC.didMove(toParent: self)
+//        
+//        // Add startButton
+//        view.addSubview(startButton)
+//        
+//        // Apply constraints
+//        NSLayoutConstraint.activate([
+//            // Header stack view constraints
+//            imageView.widthAnchor.constraint(equalToConstant: 40),
+//            imageView.heightAnchor.constraint(equalToConstant: 40),
+//            headerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//            headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+//            headerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+//            
+//            // Carousel view constraints
+//            carouselView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            carouselView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            carouselView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 16),
+//            carouselView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
+//            
+//            // Start button constraints
+//            startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+//            startButton.topAnchor.constraint(equalTo: carouselView.bottomAnchor, constant: 32),
+//            startButton.heightAnchor.constraint(equalToConstant: 50) // Button height
+//        ])
+//        
+//        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+//    }
+//    
+//    @objc private func startButtonTapped() {
+//        print("BluButton clicked! Perform your action here.")
+//    }
+//}
